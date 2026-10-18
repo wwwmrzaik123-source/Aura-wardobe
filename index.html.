@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AuraFit - AI Outfit Planner</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Alpine.js for interactivity -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col" x-data="appData()">
+
+    <!-- Header -->
+    <header class="border-b border-slate-800 bg-slate-900/50 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <span class="text-2xl">✨</span>
+                <h1 class="text-xl font-bold tracking-tight bg-gradient-to-r from-indigo-400 to-pink-400 bg-clip-text text-transparent">AuraFit</h1>
+            </div>
+            <!-- Navigation Tabs -->
+            <nav class="flex space-x-2 bg-slate-800/80 p-1 rounded-xl">
+                <button @click="activeTab = 'generator'" :class="activeTab === 'generator' ? 'bg-indigo-600 text-white' : 'text-slate-400 hover:text-white'" class="px-4 py-1.5 rounded-lg text-sm font-medium transition">AI Generator</button>
+                <button @click="activeTab = 'wardrobe'" :class="activeTab === 'wardrobe' ? 'bg-indigo-600 text-white' : 'text-slate-400 hover:text-white'" class="px-4 py-1.5 rounded-lg text-sm font-medium transition flex items-center space-x-1">
+                    <span>My Closet (<span x-text="wardrobe.length"></span>)</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-5xl mx-auto px-4 py-8 flex-grow w-full">
+
+        <!---------------- TAB 1: AI GENERATOR ---------------->
+        <div x-show="activeTab === 'generator'" class="space-y-6">
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl text-center space-y-3">
+                <h2 class="text-2xl font-bold text-indigo-300">AI Outfit Generator</h2>
+                <p class="text-sm text-slate-400 max-w-lg mx-auto">Configure your day's weather and occasion to generate a smart clothing match from your uploaded items.</p>
+            </div>
+
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                    <div>
+                        <label class="block text-sm text-slate-400 mb-1">Occasion</label>
+                        <select x-model="occasion" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-indigo-500">
+                            <option value="Casual / Daily Out">Casual / Daily Out</option>
+                            <option value="University / Campus">University / Campus</option>
+                            <option value="Smart Casual / Meeting">Smart Casual / Meeting</option>
+                            <option value="Gym / Workout">Gym / Workout</option>
+                            <option value="Night Out / Hangout">Night Out / Hangout</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm text-slate-400 mb-1">Weather & Temperature</label>
+
